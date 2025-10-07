@@ -1,0 +1,107 @@
+.technologies {
+  background: var(--dark-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.technologies::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 0, 110, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.technologies .section-title {
+  color: var(--text-white);
+}
+
+.tech-subtitle {
+  color: var(--text-light) !important;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.tech-category {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 217, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.tech-category:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary-color);
+  transform: translateY(-10px);
+  box-shadow: var(--glow-cyan);
+}
+
+.tech-category-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tech-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-accent);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text-white);
+  box-shadow: var(--glow-pink);
+  transition: all 0.3s ease;
+}
+
+.tech-category:hover .tech-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.tech-category h3 {
+  font-size: 20px;
+  color: var(--text-white);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-tag {
+  background: rgba(0, 217, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: var(--glow-cyan);
+}
+
+@media (max-width: 768px) {
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
