@@ -43,7 +43,10 @@ const ParticlesBackground = () => {
       }
 
       draw() {
-        ctx.fillStyle = `rgba(0, 217, 255, ${this.opacity})`
+        // Hacer partículas más visibles en la parte superior (Hero)
+        const heroZone = this.y < window.innerHeight
+        const opacity = heroZone ? this.opacity * 1.5 : this.opacity
+        ctx.fillStyle = `rgba(0, 217, 255, ${opacity})`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -70,8 +73,11 @@ const ParticlesBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < 120) {
-            ctx.strokeStyle = `rgba(0, 217, 255, ${0.2 * (1 - distance / 120)})`
-            ctx.lineWidth = 1
+            // Líneas más visibles en la zona Hero
+            const inHeroZone = particles[i].y < window.innerHeight && particles[j].y < window.innerHeight
+            const lineOpacity = inHeroZone ? 0.35 : 0.2
+            ctx.strokeStyle = `rgba(0, 217, 255, ${lineOpacity * (1 - distance / 120)})`
+            ctx.lineWidth = inHeroZone ? 1.5 : 1
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
