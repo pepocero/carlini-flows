@@ -38,7 +38,7 @@ const Contact = () => {
     setStatus({ loading: true, success: false, error: false, message: '' })
 
     try {
-      const response = await fetch('/functions/contact', {
+      const response = await fetch('/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
