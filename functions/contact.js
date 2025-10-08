@@ -2,6 +2,19 @@
 export async function onRequestPost(context) {
   const { request, env } = context
 
+  // Agregar CORS headers
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'application/json'
+  }
+
+  // Handle OPTIONS request
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders })
+  }
+
   try {
     // Parsear el body de la request
     const data = await request.json()
@@ -11,7 +24,7 @@ export async function onRequestPost(context) {
     if (!name || !email || !phone || !company || !service || !message) {
       return new Response(JSON.stringify({ error: 'Todos los campos son obligatorios' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' }
+        headers: corsHeaders
       })
     }
 
@@ -20,7 +33,7 @@ export async function onRequestPost(context) {
     if (!emailRegex.test(email)) {
       return new Response(JSON.stringify({ error: 'Email no válido' }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' }
+        headers: corsHeaders
       })
     }
 
@@ -33,165 +46,61 @@ export async function onRequestPost(context) {
     }
 
     const serviceName = serviceNames[service] || service
+    const recipientEmail = env.RECIPIENT_EMAIL || 'pepocero@gmail.com'
 
-    // Preparar datos para enviar email usando una API externa
-    const emailData = {
-      from: env.GMAIL_USER || 'pepocero@gmail.com',
-      to: env.RECIPIENT_EMAIL || 'pepocero@gmail.com',
-      subject: `Nueva Solicitud de Contacto - ${serviceName}`,
-      name: name,
-      email: email,
-      phone: phone,
-      company: company,
-      service: serviceName,
-      message: message
+    // Usar EmailJS (servicio gratuito que funciona perfecto con Cloudflare)
+    const emailJsServiceId = env.EMAILJS_SERVICE_ID
+    const emailJsTemplateId = env.EMAILJS_TEMPLATE_ID
+    const emailJsPublicKey = env.EMAILJS_PUBLIC_KEY
+
+    // Si no hay credenciales de EmailJS, usar solución temporal
+    if (!emailJsServiceId || !emailJsTemplateId || !emailJsPublicKey) {
+      // Por ahora, solo logear y retornar éxito para testing
+      console.log('Nuevo mensaje de contacto:')
+      console.log('Nombre:', name)
+      console.log('Email:', email)
+      console.log('Teléfono:', phone)
+      console.log('Empresa:', company)
+      console.log('Servicio:', serviceName)
+      console.log('Mensaje:', message)
+      console.log('Destinatario:', recipientEmail)
+      
+      return new Response(JSON.stringify({ 
+        success: true, 
+        message: 'Formulario recibido correctamente. Configuración de EmailJS pendiente.',
+        note: 'Los datos han sido registrados en los logs.'
+      }), {
+        status: 200,
+        headers: corsHeaders
+      })
     }
 
-    // Usar MailChannels (API gratuita de Cloudflare Workers)
-    const mailChannelsResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    // Enviar con EmailJS
+    const emailJsResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: emailData.to }],
-            dkim_domain: 'solucionesit.com',
-            dkim_selector: 'mailchannels'
-          }
-        ],
-        from: {
-          email: 'noreply@solucionesit.com',
-          name: 'Formulario Soluciones IT'
-        },
-        reply_to: {
-          email: email,
-          name: name
-        },
-        subject: emailData.subject,
-        content: [
-          {
-            type: 'text/html',
-            value: `
-              <!DOCTYPE html>
-              <html>
-              <head>
-                <style>
-                  body {
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                    line-height: 1.6;
-                    color: #333;
-                    max-width: 600px;
-                    margin: 0 auto;
-                    padding: 20px;
-                  }
-                  .header {
-                    background: linear-gradient(135deg, #00D9FF 0%, #8338EC 50%, #FF006E 100%);
-                    color: white;
-                    padding: 30px;
-                    border-radius: 10px 10px 0 0;
-                    text-align: center;
-                  }
-                  .header h1 {
-                    margin: 0;
-                    font-size: 28px;
-                  }
-                  .content {
-                    background: #f8f9fa;
-                    padding: 30px;
-                    border-radius: 0 0 10px 10px;
-                  }
-                  .field {
-                    margin-bottom: 20px;
-                    padding: 15px;
-                    background: white;
-                    border-radius: 8px;
-                    border-left: 4px solid #00D9FF;
-                  }
-                  .field-label {
-                    font-weight: 600;
-                    color: #00D9FF;
-                    margin-bottom: 5px;
-                    font-size: 14px;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                  }
-                  .field-value {
-                    color: #333;
-                    font-size: 16px;
-                  }
-                  .message-box {
-                    background: white;
-                    padding: 20px;
-                    border-radius: 8px;
-                    border-left: 4px solid #8338EC;
-                    margin-top: 20px;
-                  }
-                  .footer {
-                    text-align: center;
-                    margin-top: 30px;
-                    padding: 20px;
-                    color: #666;
-                    font-size: 14px;
-                  }
-                </style>
-              </head>
-              <body>
-                <div class="header">
-                  <h1>🚀 Nueva Solicitud de Contacto</h1>
-                  <p style="margin: 10px 0 0 0; opacity: 0.9;">Formulario de Soluciones IT</p>
-                </div>
-                
-                <div class="content">
-                  <div class="field">
-                    <div class="field-label">Nombre Completo</div>
-                    <div class="field-value">${name}</div>
-                  </div>
-                  
-                  <div class="field">
-                    <div class="field-label">Email</div>
-                    <div class="field-value"><a href="mailto:${email}" style="color: #00D9FF; text-decoration: none;">${email}</a></div>
-                  </div>
-                  
-                  <div class="field">
-                    <div class="field-label">Teléfono</div>
-                    <div class="field-value"><a href="tel:${phone}" style="color: #00D9FF; text-decoration: none;">${phone}</a></div>
-                  </div>
-                  
-                  <div class="field">
-                    <div class="field-label">Empresa</div>
-                    <div class="field-value">${company}</div>
-                  </div>
-                  
-                  <div class="field">
-                    <div class="field-label">Servicio de Interés</div>
-                    <div class="field-value">${serviceName}</div>
-                  </div>
-                  
-                  <div class="message-box">
-                    <div class="field-label" style="color: #8338EC;">Mensaje</div>
-                    <div class="field-value" style="margin-top: 10px;">${message}</div>
-                  </div>
-                </div>
-                
-                <div class="footer">
-                  <p>Este mensaje fue enviado desde el formulario de contacto de Soluciones IT</p>
-                  <p style="margin-top: 10px;">
-                    <strong>Responder a:</strong> 
-                    <a href="mailto:${email}" style="color: #00D9FF; text-decoration: none;">${email}</a>
-                  </p>
-                </div>
-              </body>
-              </html>
-            `
-          }
-        ]
+        service_id: emailJsServiceId,
+        template_id: emailJsTemplateId,
+        user_id: emailJsPublicKey,
+        template_params: {
+          to_email: recipientEmail,
+          from_name: name,
+          from_email: email,
+          phone: phone,
+          company: company,
+          service: serviceName,
+          message: message,
+          reply_to: email
+        }
       })
     })
 
-    if (!mailChannelsResponse.ok) {
-      throw new Error('Error al enviar el email a través de MailChannels')
+    if (!emailJsResponse.ok) {
+      const errorText = await emailJsResponse.text()
+      throw new Error(`EmailJS error: ${errorText}`)
     }
 
     return new Response(JSON.stringify({ 
@@ -199,18 +108,17 @@ export async function onRequestPost(context) {
       message: 'Email enviado correctamente' 
     }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: corsHeaders
     })
 
   } catch (error) {
-    console.error('Error:', error)
+    console.error('Error completo:', error)
     return new Response(JSON.stringify({ 
       error: 'Error al enviar el email',
       details: error.message 
     }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: corsHeaders
     })
   }
 }
-
