@@ -8,6 +8,7 @@ import Technologies from './components/Technologies/Technologies'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.css'
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Technologies />
       <Contact />
       <Footer />
+      <ScrollToTop />
     </div>
   )
 }

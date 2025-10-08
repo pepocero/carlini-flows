@@ -1,0 +1,16 @@
+# Configuración de Cloudflare Pages
+name = "soluciones-it"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+cwd = ""
+
+[build.upload]
+format = "directory"
+dir = "dist"
+
+# Variables de entorno (se configuran en el dashboard de Cloudflare)
+# GMAIL_USER
+# RECIPIENT_EMAIL
+

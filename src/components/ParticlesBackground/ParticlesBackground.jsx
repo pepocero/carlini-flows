@@ -11,6 +11,7 @@ const ParticlesBackground = () => {
     const ctx = canvas.getContext('2d')
     let animationFrameId
     let particles = []
+    let scrollY = 0
 
     // Configurar tamaño del canvas
     const resizeCanvas = () => {
@@ -20,6 +21,12 @@ const ParticlesBackground = () => {
 
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
+
+    // Detectar scroll
+    const handleScroll = () => {
+      scrollY = window.scrollY
+    }
+    window.addEventListener('scroll', handleScroll)
 
     // Clase Particle
     class Particle {
@@ -43,13 +50,22 @@ const ParticlesBackground = () => {
       }
 
       draw() {
-        // Hacer partículas más visibles en la parte superior (Hero)
-        const heroZone = this.y < window.innerHeight
-        const opacity = heroZone ? this.opacity * 1.5 : this.opacity
-        ctx.fillStyle = `rgba(0, 217, 255, ${opacity})`
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
+        // Calcular posición absoluta considerando el scroll
+        const absoluteY = this.y + scrollY
+        const viewportY = this.y
+        
+        // Solo dibujar en Hero (primeros 100vh) o Footer (últimos 400px - solo el footer oscuro)
+        const pageHeight = document.documentElement.scrollHeight
+        const heroZone = absoluteY < window.innerHeight
+        const footerZone = absoluteY > pageHeight - 400  // Solo en los últimos 400px (footer)
+        
+        if (heroZone || footerZone) {
+          const opacity = heroZone ? this.opacity * 1.5 : this.opacity
+          ctx.fillStyle = `rgba(0, 217, 255, ${opacity})`
+          ctx.beginPath()
+          ctx.arc(this.x, viewportY, this.size, 0, Math.PI * 2)
+          ctx.fill()
+        }
       }
     }
 
@@ -66,6 +82,8 @@ const ParticlesBackground = () => {
 
     // Conectar partículas cercanas
     const connectParticles = () => {
+      const pageHeight = document.documentElement.scrollHeight
+      
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
@@ -73,15 +91,22 @@ const ParticlesBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < 120) {
-            // Líneas más visibles en la zona Hero
-            const inHeroZone = particles[i].y < window.innerHeight && particles[j].y < window.innerHeight
-            const lineOpacity = inHeroZone ? 0.35 : 0.2
-            ctx.strokeStyle = `rgba(0, 217, 255, ${lineOpacity * (1 - distance / 120)})`
-            ctx.lineWidth = inHeroZone ? 1.5 : 1
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.stroke()
+            // Calcular si ambas partículas están en Hero o Footer
+            const absoluteY1 = particles[i].y + scrollY
+            const absoluteY2 = particles[j].y + scrollY
+            
+            const inHeroZone = absoluteY1 < window.innerHeight && absoluteY2 < window.innerHeight
+            const inFooterZone = absoluteY1 > pageHeight - 400 && absoluteY2 > pageHeight - 400  // Solo últimos 400px
+            
+            if (inHeroZone || inFooterZone) {
+              const lineOpacity = inHeroZone ? 0.35 : 0.2
+              ctx.strokeStyle = `rgba(0, 217, 255, ${lineOpacity * (1 - distance / 120)})`
+              ctx.lineWidth = inHeroZone ? 1.5 : 1
+              ctx.beginPath()
+              ctx.moveTo(particles[i].x, particles[i].y)
+              ctx.lineTo(particles[j].x, particles[j].y)
+              ctx.stroke()
+            }
           }
         }
       }
@@ -105,6 +130,7 @@ const ParticlesBackground = () => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('scroll', handleScroll)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])

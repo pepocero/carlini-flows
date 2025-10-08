@@ -1,6 +1,8 @@
 # 🚀 Soluciones IT - Website Profesional
 
-Aplicación web moderna desarrollada con React, Vite y Node.js para empresa de soluciones informáticas enfocada en PyMEs.
+Aplicación web moderna desarrollada con React, Vite y Cloudflare Functions para empresa de soluciones informáticas enfocada en PyMEs.
+
+**✅ Optimizado para Cloudflare Pages**
 
 ## ✨ Características
 
@@ -8,10 +10,10 @@ Aplicación web moderna desarrollada con React, Vite y Node.js para empresa de s
 - **Framer Motion**: Animaciones fluidas y profesionales
 - **Diseño Responsivo**: Adaptado a todos los dispositivos
 - **Paleta de Colores Vibrante**: Cyan (#00D9FF), Púrpura (#8338EC), Rosa (#FF006E)
-- **Formulario Funcional**: Envío de emails automático a pepocero@gmail.com
-- **Optimizado para Vercel**: Configuración lista para deploy
+- **Formulario Funcional**: Envío de emails con MailChannels
+- **Optimizado para Cloudflare Pages**: Configuración lista para deploy
 - **Partículas Animadas**: Fondo interactivo con canvas
-- **API Backend**: Serverless functions para envío de emails
+- **Cloudflare Functions**: Serverless functions para envío de emails
 
 ## 🎨 Paleta de Colores
 
@@ -49,76 +51,59 @@ npm run preview
 
 ## 📧 Configuración de Email
 
-### Paso 1: Crear contraseña de aplicación en Gmail
+### Cloudflare Pages con MailChannels
 
-1. Ve a tu cuenta de Google: https://myaccount.google.com/
-2. Seguridad → Verificación en 2 pasos (activarla si no está)
-3. Contraseñas de aplicaciones
-4. Crear nueva contraseña de aplicación
-5. Seleccionar "Correo" y "Otro" (escribe "Soluciones IT")
-6. Copiar la contraseña generada
+Tu proyecto usa **MailChannels** (API gratuita de Cloudflare Workers):
 
-### Paso 2: Configurar variables de entorno
+✅ **Ventajas:**
+- No requiere contraseña de Gmail
+- Gratis para Cloudflare Pages
+- Confiable y rápido
+- Sin límites
 
-Crea un archivo `.env` en la raíz del proyecto:
+### Variables de Entorno en Cloudflare
 
-```env
-GMAIL_USER=pepocero@gmail.com
-GMAIL_APP_PASSWORD=tu-contraseña-de-aplicacion
-RECIPIENT_EMAIL=pepocero@gmail.com
-```
+En el Dashboard de Cloudflare Pages:
 
-### Paso 3: Variables en Vercel
-
-En tu proyecto de Vercel, agrega las variables de entorno:
-
-1. Settings → Environment Variables
+1. Tu proyecto → **Settings** → **Environment variables**
 2. Agregar:
    - `GMAIL_USER`: pepocero@gmail.com
-   - `GMAIL_APP_PASSWORD`: (la contraseña de aplicación)
    - `RECIPIENT_EMAIL`: pepocero@gmail.com
 
-## 🚀 Deploy en Vercel
+**Nota:** Con MailChannels NO necesitas `GMAIL_APP_PASSWORD` ✅
 
-### Opción 1: Desde GitHub (Recomendado)
+## 🚀 Deploy en Cloudflare Pages
 
-```bash
-# Inicializar Git
-git init
-git add .
-git commit -m "Initial commit"
+### Quick Start (5 minutos)
 
-# Crear repositorio en GitHub y conectar
-git remote add origin https://github.com/tu-usuario/soluciones-it.git
-git branch -M main
-git push -u origin main
-```
+Ver: **`CLOUDFLARE-QUICKSTART.md`** para guía rápida
 
-Luego en Vercel:
-1. Import Project
-2. Seleccionar el repositorio
-3. Agregar variables de entorno
-4. Deploy
+### Guía Completa
 
-### Opción 2: CLI de Vercel
+Ver: **`CLOUDFLARE-DEPLOY.md`** para documentación detallada
 
-```bash
-# Instalar Vercel CLI
-npm i -g vercel
+### Pasos Básicos:
 
-# Deploy
-vercel
+1. **Push a GitHub** (ya hecho)
+2. **Cloudflare Dashboard** → Workers & Pages → Create
+3. **Conectar repositorio** `pepocero/solucionesit`
+4. **Configurar:**
+   - Framework: Vite
+   - Build: `npm run build`
+   - Output: `dist`
+5. **Variables:**
+   - `GMAIL_USER=pepocero@gmail.com`
+   - `RECIPIENT_EMAIL=pepocero@gmail.com`
+6. **Deploy** → ¡Listo!
 
-# Deploy a producción
-vercel --prod
-```
+Tu sitio: `https://solucionesit.pages.dev`
 
 ## 📁 Estructura del Proyecto
 
 ```
 soluciones-it/
-├── api/
-│   └── contact.js          # API endpoint para emails
+├── functions/
+│   └── contact.js          # Cloudflare Function para emails
 ├── src/
 │   ├── components/
 │   │   ├── Navbar/
@@ -153,12 +138,12 @@ soluciones-it/
 - React Intersection Observer
 
 ### Backend
-- Node.js
-- Nodemailer
-- Vercel Serverless Functions
+- Cloudflare Functions
+- MailChannels API
+- Cloudflare Workers
 
 ### Deployment
-- Vercel
+- Cloudflare Pages
 - GitHub
 
 ## 📱 Características Responsivas
