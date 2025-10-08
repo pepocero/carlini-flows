@@ -38,10 +38,24 @@ const Contact = () => {
     e.preventDefault()
     setStatus({ loading: true, success: false, error: false, message: '' })
 
-    // Configuración EmailJS (usar variables de entorno en producción)
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bvchqjl'
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_0bumg9q'
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'l7AQPjwiBaQ-4pGOx'
+    // Configuración EmailJS (desde variables de entorno)
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    // Verificar que las variables estén configuradas
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus({
+        loading: false,
+        success: false,
+        error: true,
+        message: 'Error de configuración del servicio de email. Contacta al administrador.'
+      })
+      setTimeout(() => {
+        setStatus({ loading: false, success: false, error: false, message: '' })
+      }, 5000)
+      return
+    }
 
     try {
       // Enviar email directamente con EmailJS desde el navegador
