@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaLinkedin, FaTwitter, FaGithub, FaFacebook } from 'react-icons/fa'
+import emailjs from '@emailjs/browser'
 import './Contact.css'
 
 const Contact = () => {
@@ -37,18 +38,29 @@ const Contact = () => {
     e.preventDefault()
     setStatus({ loading: true, success: false, error: false, message: '' })
 
+    // Configuración EmailJS (usar variables de entorno en producción)
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_bvchqjl'
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_0bumg9q'
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'l7AQPjwiBaQ-4pGOx'
+
     try {
-      const response = await fetch('/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+      // Enviar email directamente con EmailJS desde el navegador
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message,
+          to_email: 'pepocero@gmail.com'
         },
-        body: JSON.stringify(formData)
-      })
+        publicKey
+      )
 
-      const data = await response.json()
-
-      if (response.ok) {
+      if (result.status === 200) {
         setStatus({
           loading: false,
           success: true,
@@ -64,14 +76,15 @@ const Contact = () => {
           message: ''
         })
       } else {
-        throw new Error(data.error || 'Error al enviar el mensaje')
+        throw new Error('Error al enviar el mensaje')
       }
     } catch (error) {
+      console.error('EmailJS Error:', error)
       setStatus({
         loading: false,
         success: false,
         error: true,
-        message: error.message || 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'
+        message: 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'
       })
     }
 

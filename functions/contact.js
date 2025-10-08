@@ -113,9 +113,14 @@ export async function onRequestPost(context) {
 
   } catch (error) {
     console.error('Error completo:', error)
+    console.error('Error stack:', error.stack)
+    console.error('Error name:', error.name)
+    
     return new Response(JSON.stringify({ 
       error: 'Error al enviar el email',
-      details: error.message 
+      details: error.message,
+      errorType: error.name,
+      timestamp: new Date().toISOString()
     }), {
       status: 500,
       headers: corsHeaders
