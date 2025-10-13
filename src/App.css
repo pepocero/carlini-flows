@@ -85,10 +85,6 @@ section {
   overflow: hidden;
 }
 
-section:nth-child(even) {
-  background: var(--light-bg);
-}
-
 /* Buttons */
 .btn {
   display: inline-flex;

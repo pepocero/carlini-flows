@@ -20,8 +20,7 @@ const Services = () => {
       icon: <FaRobot />,
       title: 'Digitalización con IA',
       description: 'Incorporamos inteligencia artificial y automatización para optimizar procesos, reducir tareas repetitivas y aumentar la eficiencia de tu empresa.',
-      features: ['Automatización inteligente', 'Análisis predictivo', 'Asistentes virtuales'],
-      featured: true
+      features: ['Automatización inteligente', 'Análisis predictivo', 'Asistentes virtuales']
     },
     {
       icon: <FaTools />,
@@ -51,12 +50,11 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className={`service-card ${service.featured ? 'featured' : ''}`}
+              className="service-card"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.2, duration: 0.6 }}
             >
-              {service.featured && <div className="featured-badge">Más Popular</div>}
               <div className="service-icon">{service.icon}</div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>

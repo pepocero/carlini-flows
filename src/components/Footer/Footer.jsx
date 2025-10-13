@@ -24,7 +24,7 @@ const Footer = () => {
           <div className="footer-section">
             <div className="footer-logo">
               <FaCode />
-              <span>Soluciones IT</span>
+              <span>Carlini Flows</span>
             </div>
             <p>
               Transformamos empresas mediante tecnología personalizada, 
@@ -38,7 +38,7 @@ const Footer = () => {
               <li><a href="#servicios" onClick={(e) => handleNavClick(e, 'servicios')}>Desarrollo Web</a></li>
               <li><a href="#servicios" onClick={(e) => handleNavClick(e, 'servicios')}>Digitalización IA</a></li>
               <li><a href="#servicios" onClick={(e) => handleNavClick(e, 'servicios')}>Personalización CRM</a></li>
-              <li><a href="#servicios" onClick={(e) => handleNavClick(e, 'servicios')}>Consultoría IT</a></li>
+              <li><a href="#ia" onClick={(e) => handleNavClick(e, 'ia')}>Soluciones IA</a></li>
             </ul>
           </div>
 
@@ -46,8 +46,8 @@ const Footer = () => {
             <h4>Empresa</h4>
             <ul>
               <li><a href="#inicio" onClick={(e) => handleNavClick(e, 'inicio')}>Sobre Nosotros</a></li>
+              <li><a href="#portfolio" onClick={(e) => handleNavClick(e, 'portfolio')}>Portfolio</a></li>
               <li><a href="#proceso" onClick={(e) => handleNavClick(e, 'proceso')}>Metodología</a></li>
-              <li><a href="#ventajas" onClick={(e) => handleNavClick(e, 'ventajas')}>Por qué Elegirnos</a></li>
               <li><a href="#contacto" onClick={(e) => handleNavClick(e, 'contacto')}>Contacto</a></li>
             </ul>
           </div>
@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Soluciones IT. Todos los derechos reservados.</p>
+          <p>&copy; {currentYear} Carlini Flows. Todos los derechos reservados.</p>
           <p className="footer-credit">Desarrollado con <span className="heart">❤️</span> y tecnología de vanguardia</p>
         </div>
       </div>

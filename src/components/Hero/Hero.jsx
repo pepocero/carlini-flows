@@ -34,9 +34,11 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            Transformamos tu Empresa con
+            <span className="gradient-text-main">Carlini Flows</span>
             <br />
-            <span className="gradient-text">Tecnología e IA</span>
+            <span className="hero-subtitle-inline">Transformamos tu Empresa con</span>
+            <br />
+            <span className="gradient-text-secondary">Inteligencia Artificial</span>
           </motion.h1>
           
           <motion.p 

@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import Services from './components/Services/Services'
+import Portfolio from './components/Portfolio/Portfolio'
 import Advantages from './components/Advantages/Advantages'
 import Process from './components/Process/Process'
-import Technologies from './components/Technologies/Technologies'
+import AISolutions from './components/Technologies/Technologies'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground'
@@ -28,7 +29,7 @@ function App() {
           <div className="loader-ring"></div>
           <div className="loader-ring"></div>
           <div className="loader-ring"></div>
-          <span className="loader-text">Soluciones IT</span>
+          <span className="loader-text">Carlini Flows</span>
         </div>
       </div>
     )
@@ -40,9 +41,10 @@ function App() {
       <Navbar />
       <Hero />
       <Services />
+      <Portfolio />
       <Advantages />
       <Process />
-      <Technologies />
+      <AISolutions />
       <Contact />
       <Footer />
       <ScrollToTop />

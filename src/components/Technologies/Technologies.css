@@ -15,6 +15,17 @@
   border-radius: 50%;
 }
 
+.technologies::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(131, 56, 236, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
 .technologies .section-title {
   color: var(--text-white);
 }
@@ -23,85 +34,146 @@
   color: var(--text-light) !important;
 }
 
-.tech-grid {
+/* AI Solutions Grid */
+.ai-solutions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
+  position: relative;
+  z-index: 1;
 }
 
-.tech-category {
+.ai-solution-card {
   background: rgba(255, 255, 255, 0.03);
-  padding: 30px;
+  padding: 35px;
   border-radius: 20px;
-  border: 1px solid rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.15);
   transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.tech-category:hover {
+.ai-solution-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.ai-solution-card:hover::before {
+  transform: scaleX(1);
+}
+
+.ai-solution-card:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--primary-color);
   transform: translateY(-10px);
-  box-shadow: var(--glow-cyan);
+  box-shadow: 0 15px 40px rgba(0, 217, 255, 0.2);
 }
 
-.tech-category-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.ai-icon-wrapper {
   margin-bottom: 20px;
 }
 
-.tech-icon {
-  width: 50px;
-  height: 50px;
+.ai-icon {
+  width: 70px;
+  height: 70px;
   background: var(--gradient-accent);
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 32px;
   color: var(--text-white);
   box-shadow: var(--glow-pink);
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
-.tech-category:hover .tech-icon {
-  transform: scale(1.1) rotate(-5deg);
+.ai-solution-card:hover .ai-icon {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: var(--glow-purple);
 }
 
-.tech-category h3 {
-  font-size: 20px;
+.ai-solution-card h3 {
+  font-size: 22px;
   color: var(--text-white);
+  margin-bottom: 12px;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.ai-description {
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-size: 15px;
 }
 
-.tech-tag {
-  background: rgba(0, 217, 255, 0.1);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
+.ai-benefits {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.benefits-label {
+  font-size: 13px;
   color: var(--primary-color);
-  border: 1px solid rgba(0, 217, 255, 0.3);
-  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
 
-.tech-tag:hover {
-  background: var(--gradient-primary);
+.ai-benefits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ai-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.benefit-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--gradient-secondary);
   color: var(--text-white);
-  border-color: transparent;
-  transform: translateY(-3px);
-  box-shadow: var(--glow-cyan);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+@media (max-width: 968px) {
+  .ai-solutions-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
-  .tech-grid {
+  .ai-solutions-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .ai-solution-card {
+    padding: 25px;
   }
 }
 

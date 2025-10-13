@@ -1,5 +1,5 @@
 .advantages {
-  background: var(--dark-bg);
+  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0d1b2a 100%);
   color: var(--text-white);
   position: relative;
   overflow: hidden;
@@ -8,12 +8,25 @@
 .advantages::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -20%;
+  top: -20%;
+  right: -15%;
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, transparent 60%);
   border-radius: 50%;
+  animation: float 10s ease-in-out infinite;
+}
+
+.advantages::after {
+  content: '';
+  position: absolute;
+  bottom: -25%;
+  left: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(131, 56, 236, 0.12) 0%, transparent 60%);
+  border-radius: 50%;
+  animation: float 12s ease-in-out infinite reverse;
 }
 
 .advantages .section-title {
