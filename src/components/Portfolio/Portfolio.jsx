@@ -15,28 +15,32 @@ const Portfolio = () => {
       url: 'https://candeivid.com/',
       description: 'Sitio web completo con múltiples herramientas y aplicaciones integradas.',
       icon: <FaGlobe />,
-      type: 'Website'
+      type: 'Website',
+      image: '/Candeivid.PNG'
     },
     {
       name: 'Global Proyectos',
       url: 'http://globalproyectos.net/',
       description: 'Capacitación del personal, automatización de procesos y optimización de sistemas.',
       icon: <FaChalkboardTeacher />,
-      type: 'Consultoría & Automatización'
+      type: 'Consultoría & Automatización',
+      image: '/global.PNG'
     },
     {
       name: 'AMCA',
       url: 'https://amca.es',
       description: 'Desarrollo web profesional con diseño personalizado y funcionalidades específicas.',
       icon: <FaGlobe />,
-      type: 'Website'
+      type: 'Website',
+      image: '/amca.PNG'
     },
     {
       name: 'Eureko',
       url: 'https://www.eureko.es/',
       description: 'Implementación completa de tienda PrestaShop integrada en diseño personalizado.',
       icon: <FaTools />,
-      type: 'E-commerce'
+      type: 'E-commerce',
+      image: '/eureko.PNG'
     }
   ]
 
@@ -46,49 +50,56 @@ const Portfolio = () => {
       url: 'https://candeivid.com/extractor/index.html',
       description: 'Herramienta de automatización para extracción de enlaces torrent de webs de descargas.',
       icon: <FaFileDownload />,
-      tech: 'Automatización Web'
+      tech: 'Automatización Web',
+      image: '/extractor.PNG'
     },
     {
       name: 'Gestor de Trackers',
       url: 'https://candeivid.com/trackers/index.php',
       description: 'App que une trackers actualizados para torrents, manteniéndolos siempre al día.',
       icon: <FaCode />,
-      tech: 'PHP + API'
+      tech: 'PHP + API',
+      image: '/trackers.PNG'
     },
     {
       name: 'Pizarra Interactiva',
-      url: 'https://candeivid.com/pizarra/index.php',
+      url: 'https://carliniwhiteboard.pages.dev/',
       description: 'Pizarra avanzada que convierte texto en tarjetas interactivas. Permite dibujar, vincular, agrupar y mover elementos.',
       icon: <FaLaptopCode />,
-      tech: 'JavaScript + Canvas'
+      tech: 'JavaScript + Canvas',
+      image: '/pizarra.PNG'
     },
     {
       name: 'Editor PDF Profesional',
       url: 'https://candeivid.com/pdf/presentacion.html',
       description: 'Editor PDF completo: agregar imágenes, textos, resaltar, dibujar, formas y más funcionalidades.',
       icon: <FaFilePdf />,
-      tech: 'PDF.js + Canvas'
+      tech: 'PDF.js + Canvas',
+      image: '/editorpdf.PNG'
     },
     {
       name: 'Conversor de Archivos',
       url: 'https://candeivid.com/conversor/index.html',
       description: 'Conversor multiformato: Texto a PDF, PDF a Word y convertidor de audio.',
       icon: <FaFileWord />,
-      tech: 'Procesamiento de Archivos'
+      tech: 'Procesamiento de Archivos',
+      image: '/conversor.PNG'
     },
     {
       name: 'Gestión de Partes de Trabajo',
-      url: 'https://gestiogar.vercel.app/',
+      url: 'https://gestiogar.pages.dev/',
       description: 'Sistema completo para empresas de reparaciones del hogar. Gestión de clientes, trabajos y presupuestos.',
       icon: <FaClipboardList />,
-      tech: 'React + Vercel'
+      tech: 'React + Vercel',
+      image: '/partestrabajo.PNG'
     },
     {
       name: 'Sistema de Gestión Educativa',
       url: 'https://gestionetbb.com/',
       description: 'Plataforma integral para gestión de alumnos, profesores, materias, carreras y calificaciones.',
       icon: <FaGraduationCap />,
-      tech: 'Sistema Completo'
+      tech: 'Sistema Completo',
+      image: '/gestioneducativa.PNG'
     }
   ]
 
@@ -131,7 +142,18 @@ const Portfolio = () => {
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
               >
-                <div className="portfolio-icon">{project.icon}</div>
+                <div className="portfolio-image-container">
+                  <img 
+                    src={project.image} 
+                    alt={project.name}
+                    className="portfolio-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none'
+                      e.target.nextSibling.style.display = 'flex'
+                    }}
+                  />
+                  <div className="portfolio-icon" style={{ display: 'none' }}>{project.icon}</div>
+                </div>
                 <div className="portfolio-content">
                   <h4>{project.name}</h4>
                   <span className="portfolio-type">{project.type}</span>
@@ -169,7 +191,18 @@ const Portfolio = () => {
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + index * 0.08, duration: 0.5 }}
               >
-                <div className="portfolio-icon app-icon">{app.icon}</div>
+                <div className="portfolio-image-container">
+                  <img 
+                    src={app.image} 
+                    alt={app.name}
+                    className="portfolio-image"
+                    onError={(e) => {
+                      e.target.style.display = 'none'
+                      e.target.nextSibling.style.display = 'flex'
+                    }}
+                  />
+                  <div className="portfolio-icon app-icon" style={{ display: 'none' }}>{app.icon}</div>
+                </div>
                 <div className="portfolio-content">
                   <h4>{app.name}</h4>
                   <span className="portfolio-tech">{app.tech}</span>
