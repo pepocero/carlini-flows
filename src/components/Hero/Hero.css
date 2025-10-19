@@ -63,9 +63,9 @@
 }
 
 .hero-title {
-  font-size: clamp(36px, 8vw, 72px);
+  font-size: clamp(42px, 9vw, 84px);
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.1;
   margin-bottom: 24px;
   color: var(--text-white);
 }
@@ -83,8 +83,77 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
-  filter: brightness(1.2);
-  text-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+  filter: brightness(1.4);
+  text-shadow: 
+    0 0 20px rgba(0, 217, 255, 0.6),
+    0 0 40px rgba(131, 56, 236, 0.4),
+    0 0 60px rgba(255, 0, 110, 0.3),
+    0 0 0 2px rgba(0, 0, 0, 0.3);
+  font-size: clamp(48px, 10vw, 96px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  position: relative;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.gradient-text-main::before {
+  content: 'Carlini Flows';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #00D9FF 0%, #8338EC 50%, #FF006E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: titleBlur 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% {
+    filter: brightness(1.4) drop-shadow(0 0 15px rgba(0, 217, 255, 0.5));
+    text-shadow: 
+      0 0 20px rgba(0, 217, 255, 0.6),
+      0 0 40px rgba(131, 56, 236, 0.4),
+      0 0 60px rgba(255, 0, 110, 0.3),
+      0 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    filter: brightness(1.7) drop-shadow(0 0 25px rgba(0, 217, 255, 0.8));
+    text-shadow: 
+      0 0 30px rgba(0, 217, 255, 0.8),
+      0 0 50px rgba(131, 56, 236, 0.6),
+      0 0 70px rgba(255, 0, 110, 0.5),
+      0 0 0 3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@keyframes titleBlur {
+  0% {
+    filter: blur(8px) brightness(0.8);
+  }
+  100% {
+    filter: blur(12px) brightness(1.2);
+  }
+}
+
+/* Efecto de pulso adicional para el título principal */
+.gradient-text-main:hover {
+  animation: titlePulse 0.6s ease-in-out;
+}
+
+@keyframes titlePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .gradient-text-secondary {
