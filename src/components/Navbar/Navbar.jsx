@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className="container">
         <div className="nav-wrapper">
           <div className="logo">
-            <FaCode className="logo-icon" />
+            <img src="/logo2tranparente.png" alt="Carlini Flows Logo" className="logo-image" />
             <span className="logo-text">Carlini Flows</span>
           </div>
           

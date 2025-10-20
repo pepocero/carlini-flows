@@ -22,10 +22,15 @@
   margin-bottom: 16px;
 }
 
-.footer-logo svg {
-  font-size: 32px;
-  color: var(--primary-color);
-  animation: glow 2s ease-in-out infinite;
+.footer-logo-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover .footer-logo-image {
+  transform: scale(1.1);
 }
 
 .footer-section p {
@@ -95,6 +100,15 @@
 @media (max-width: 480px) {
   .footer-content {
     grid-template-columns: 1fr;
+  }
+
+  .footer-logo-image {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-logo {
+    font-size: 20px;
   }
 }
 

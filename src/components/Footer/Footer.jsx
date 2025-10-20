@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <FaCode />
+              <img src="/logo2tranparente.png" alt="Carlini Flows Logo" className="footer-logo-image" />
               <span>Carlini Flows</span>
             </div>
             <p>

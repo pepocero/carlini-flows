@@ -47,7 +47,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            Soluciones informáticas personalizadas para pequeñas y medianas empresas. 
+            Soluciones informáticas personalizadas para pequeña y mediana empresa.
             Desarrollamos aplicaciones web a medida que se adaptan perfectamente a tus necesidades específicas.
           </motion.p>
           
