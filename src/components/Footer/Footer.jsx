@@ -23,8 +23,8 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <img src="/logo2tranparente.png" alt="Carlini Flows Logo" className="footer-logo-image" />
-              <span>Carlini Flows</span>
+              <img src="/logo2tranparente.png" alt="CarliniDevs Logo" className="footer-logo-image" />
+              <span>CarliniDevs</span>
             </div>
             <p>
               Transformamos empresas mediante tecnología personalizada, 
@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Carlini Flows. Todos los derechos reservados.</p>
+          <p>&copy; {currentYear} CarliniDevs. Todos los derechos reservados.</p>
           <p className="footer-credit">Desarrollado con <span className="heart">❤️</span> y tecnología de vanguardia</p>
         </div>
       </div>

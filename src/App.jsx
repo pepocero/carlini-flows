@@ -29,7 +29,7 @@ function App() {
           <div className="loader-ring"></div>
           <div className="loader-ring"></div>
           <div className="loader-ring"></div>
-          <span className="loader-text">Carlini Flows</span>
+          <span className="loader-text">CarliniDevs</span>
         </div>
       </div>
     )

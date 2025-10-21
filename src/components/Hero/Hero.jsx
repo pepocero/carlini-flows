@@ -34,7 +34,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <span className="gradient-text-main">Carlini Flows</span>
+            <span className="gradient-text-main">CarliniDevs</span>
             <br />
             <span className="hero-subtitle-inline">Transformamos tu Empresa con</span>
             <br />

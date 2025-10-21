@@ -1,4 +1,4 @@
-# 🚀 Carlini Flows - Website Profesional
+# 🚀 CarliniDevs - Website Profesional
 
 Aplicación web moderna desarrollada con React, Vite y Cloudflare Functions para empresa de soluciones informáticas enfocada en PyMEs.
 
@@ -96,7 +96,7 @@ Ver: **`CLOUDFLARE-DEPLOY.md`** para documentación detallada
    - `RECIPIENT_EMAIL=pepocero@gmail.com`
 6. **Deploy** → ¡Listo!
 
-Tu sitio: `https://solucionesit.pages.dev`
+Tu sitio: `https://carlinidevs.pages.dev`
 
 ## 📁 Estructura del Proyecto
 
@@ -246,9 +246,9 @@ Este proyecto está bajo licencia MIT.
 
 ## 👨‍💻 Autor
 
-**Soluciones IT**
+**CarliniDevs**
 - Email: pepocero@gmail.com
-- Website: [Tu dominio en Vercel]
+- Website: [Tu dominio en Cloudflare Pages]
 
 ---
 
