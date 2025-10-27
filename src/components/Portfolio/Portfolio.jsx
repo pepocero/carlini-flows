@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FaGlobe, FaCode, FaExternalLinkAlt, FaLaptopCode, FaTools, FaChalkboardTeacher, FaFileDownload, FaFilePdf, FaFileWord, FaClipboardList, FaGraduationCap } from 'react-icons/fa'
+import { FaGlobe, FaCode, FaExternalLinkAlt, FaLaptopCode, FaTools, FaChalkboardTeacher, FaFileDownload, FaFilePdf, FaFileWord, FaClipboardList, FaGraduationCap, FaStopwatch, FaQrcode } from 'react-icons/fa'
 import './Portfolio.css'
 
 const Portfolio = () => {
@@ -63,7 +63,7 @@ const Portfolio = () => {
     },
     {
       name: 'Pizarra Interactiva',
-      url: 'https://carliniwhiteboard.pages.dev/',
+      url: 'https://pizarra.carlinitools.com',
       description: 'Pizarra avanzada que convierte texto en tarjetas interactivas. Permite dibujar, vincular, agrupar y mover elementos.',
       icon: <FaLaptopCode />,
       tech: 'JavaScript + Canvas',
@@ -87,7 +87,7 @@ const Portfolio = () => {
     },
     {
       name: 'Gestión de Partes de Trabajo',
-      url: 'https://gestiogar.pages.dev/',
+      url: 'https://gestiogar.carlinitools.com/',
       description: 'Sistema completo para empresas de reparaciones del hogar. Gestión de clientes, trabajos y presupuestos.',
       icon: <FaClipboardList />,
       tech: 'React + Vercel',
@@ -100,7 +100,24 @@ const Portfolio = () => {
       icon: <FaGraduationCap />,
       tech: 'Sistema Completo',
       image: '/gestioneducativa.PNG'
+    },
+    {
+      name: 'Control de horas de trabajo',
+      url: 'https://hourly.carlinitools.com/',
+      description: 'Control de horas trabajadas para freelancers, autónomos y empresas.',
+      icon: <FaStopwatch />,
+      tech: 'Sistema Completo',
+      image: '/hourly.PNG'
+    },
+    {
+      name: 'Generador de Códigos QR',
+      url: 'https://qr.carlinitools.com/',
+      description: 'Genera códigos QR personalizados: texto, URL, email, SMS, WiFi, contacto. Personaliza colores, tamaño, logo y nivel de corrección.',
+      icon: <FaQrcode />,
+      tech: 'QR Generator',
+      image: '/qr.PNG'
     }
+
   ]
 
   return (
