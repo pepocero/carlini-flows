@@ -156,6 +156,12 @@
   }
 }
 
+.gradient-text-secondary-wrapper {
+  display: inline-block;
+  padding-bottom: 0.1em;
+  overflow: visible;
+}
+
 .gradient-text-secondary {
   background: linear-gradient(135deg, #00D9FF 0%, #8338EC 100%);
   -webkit-background-clip: text;
@@ -163,6 +169,7 @@
   background-clip: text;
   display: inline-block;
   opacity: 0.8;
+  padding-bottom: 0.1em;
 }
 
 .hero-subtitle {

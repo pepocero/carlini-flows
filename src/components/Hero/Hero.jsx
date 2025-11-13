@@ -38,7 +38,9 @@ const Hero = () => {
             <br />
             <span className="hero-subtitle-inline">Transformamos tu Empresa con</span>
             <br />
-            <span className="gradient-text-secondary">Inteligencia Artificial</span>
+            <span className="gradient-text-secondary-wrapper">
+              <span className="gradient-text-secondary">Inteligencia Artificial</span>
+            </span>
           </motion.h1>
           
           <motion.p 
