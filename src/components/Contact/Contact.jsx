@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaLinkedin, FaTwitter, FaGithub, FaFacebook } from 'react-icons/fa'
+import { FaPaperPlane } from 'react-icons/fa'
 import emailjs from '@emailjs/browser'
 import './Contact.css'
 
@@ -110,57 +110,22 @@ const Contact = () => {
   return (
     <section id="contacto" className="contact">
       <div className="container">
+        <motion.div 
+          className="contact-title"
+          initial={{ opacity: 0, y: -30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          ref={ref}
+        >
+          <h2>¿Listo para Transformar tu Empresa?</h2>
+        </motion.div>
+
         <div className="contact-wrapper">
           <motion.div 
-            className="contact-info"
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            ref={ref}
-          >
-            <h2>¿Listo para Transformar tu Empresa?</h2>
-            <p>
-              Contáctanos hoy y descubre cómo nuestras soluciones personalizadas pueden 
-              llevar tu empresa al siguiente nivel tecnológico.
-            </p>
-
-            <div className="contact-methods">
-              <div className="contact-method">
-                <FaEnvelope />
-                <div>
-                  <h4>Email</h4>
-                  <a href="mailto:info@solucionesit.com">info@solucionesit.com</a>
-                </div>
-              </div>
-              <div className="contact-method">
-                <FaPhone />
-                <div>
-                  <h4>Teléfono</h4>
-                  <a href="tel:+34900000000">+34 900 000 000</a>
-                </div>
-              </div>
-              <div className="contact-method">
-                <FaMapMarkerAlt />
-                <div>
-                  <h4>Ubicación</h4>
-                  <p>Disponible en toda España</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="social-links">
-              <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
-              <a href="#" aria-label="Twitter"><FaTwitter /></a>
-              <a href="#" aria-label="GitHub"><FaGithub /></a>
-              <a href="#" aria-label="Facebook"><FaFacebook /></a>
-            </div>
-          </motion.div>
-
-          <motion.div 
             className="contact-form-wrapper"
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3>Solicita una Consultoría Gratuita</h3>
             <form className="contact-form" onSubmit={handleSubmit}>
@@ -199,10 +164,9 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    required
                     placeholder=" "
                   />
-                  <label htmlFor="phone">Teléfono</label>
+                  <label htmlFor="phone">Teléfono (opcional)</label>
                 </div>
                 <div className="form-group">
                   <input
@@ -211,10 +175,9 @@ const Contact = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    required
                     placeholder=" "
                   />
-                  <label htmlFor="company">Empresa</label>
+                  <label htmlFor="company">Empresa (opcional)</label>
                 </div>
               </div>
 
